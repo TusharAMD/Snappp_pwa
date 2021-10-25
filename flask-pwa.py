@@ -10,15 +10,14 @@ import pymongo
 
 app = Flask(__name__)
 
-
+# Renders index.html which contains simple form asking for email id and image
 @app.route('/')
 def home():
     return render_template('index.html')
+# On clicking submit get the file input from the form and update in database
 @app.route('/submit', methods=['GET', 'POST'])
 def submit():
     if request.method == 'POST':
-        print(request.form["email"],">>>>>>>>>..")
-        print(request.files['file'])
         email = request.form["email"]
         f = request.files['file']
         f.save(f.filename)
